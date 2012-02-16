@@ -15,7 +15,7 @@ Installation in Symfony 2 as service
 
 Add Pagerfanta and WhiteOctoberPagerfantaBundle to your vendors:
 
-    git submodule add https://sudosu@github.com/sudosu/text-language-detect.git vendor/text-language-detect
+    git submodule add https://github.com/webmil/text-language-detect.git vendor/text-language-detect
 
 Add to your autoload:
 
