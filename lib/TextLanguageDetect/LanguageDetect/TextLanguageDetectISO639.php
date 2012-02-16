@@ -340,5 +340,3 @@ class TextLanguageDetectISO639
         return self::$code3ToName[$code];
     }
 }
-
-?>

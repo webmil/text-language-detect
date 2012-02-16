@@ -54,7 +54,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
      */
     function test_readdbUnreadableFile()
     {
-        $name = tempnam(sys_get_temp_dir(), 'unittest-Text_LanguageDetect-');
+        $name = tempnam(sys_get_temp_dir(), 'unittest-TextLanguageDetect-');
         chmod($name, 0000);
         $this->x->_readdb($name);
     }
