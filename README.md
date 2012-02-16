@@ -48,11 +48,11 @@ If you're only expecting a limited set of languages, this can greatly speed up p
 Usage example
 -------------
 In controller:
-    ```php
+```php
     $ld = $this->get('language.detect');
     $text = 'Test language detection.';
     $lang = $ld->detectConfidence($text);
-
+```
 print_r($lang):
     // output
     Array
