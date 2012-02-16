@@ -1,5 +1,5 @@
 Text Language Detect
-============================
+====================
 
 Detects the language of a given piece of text.
 
@@ -7,7 +7,8 @@ The package attempts to detect the language of a sample of text by correlating r
 
 It implements a version of a technique originally proposed by Cavnar & Trenkle (1994): "N-Gram-Based Text Categorization".
 
-This is fork of http://pear.php.net/package/Text_LanguageDetect
+This is fork of http://pear.php.net/package/Text_LanguageDetect.
+Special for Symfony 2.
 
 Installation in Symfony 2 as service
 ------------------------------------
@@ -40,5 +41,17 @@ If you're only expecting a limited set of languages, this can greatly speed up p
             arguments: 
                 - { languages: ['norwegian', 'russian', 'english', 'german', 'danish', 'swedish', 'spanish', 'italian'] }
 
-Usage
------
+Usage example
+-------------
+In controller:
+    $ld = $this->get('language.detect');
+    $text = 'Test language detection.';
+    $lang = $ld->detectConfidence($text);
+
+print_r($lang):
+    Array
+    (
+        [language] => english
+        [similarity] => 0.33985507246377
+        [confidence] => 0.018985507246377
+    )
