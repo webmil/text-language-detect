@@ -13,6 +13,10 @@ Special for Symfony 2.
 Installation in Symfony 2 as service
 ------------------------------------
 
+Add Pagerfanta and WhiteOctoberPagerfantaBundle to your vendors:
+
+    git submodule add https://sudosu@github.com/sudosu/text-language-detect.git vendor/text-language-detect
+
 Add to your autoload:
 
     // app/autoload.php
@@ -44,13 +48,13 @@ If you're only expecting a limited set of languages, this can greatly speed up p
 Usage example
 -------------
 In controller:
-    //
+    ```php
     $ld = $this->get('language.detect');
     $text = 'Test language detection.';
     $lang = $ld->detectConfidence($text);
 
 print_r($lang):
-    //
+    // output
     Array
     (
         [language] => english
