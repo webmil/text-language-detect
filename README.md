@@ -30,7 +30,7 @@ Configure service:
             class: TextLanguageDetect\TextLanguageDetect
 
 
-Omits languages
+Limit languages
 ---------------
 If you're only expecting a limited set of languages, this can greatly speed up processing
 
