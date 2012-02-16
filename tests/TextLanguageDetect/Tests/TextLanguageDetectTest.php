@@ -1,23 +1,20 @@
 <?php
 
+namespace TextLanguageDetect\Tests;
+
 /**
  * @package Text_LanguageDetect
  * @version CVS: $Id: Text_LanguageDetectTest.php 322353 2012-01-16 08:41:43Z cweiske $
  */
-set_include_path(
-    __DIR__ . '/../' . PATH_SEPARATOR . get_include_path()
-);
-error_reporting(E_ALL|E_STRICT);
 
-require_once 'Text/LanguageDetect.php';
-require_once 'PHPUnit/Framework/TestCase.php';
+use TextLanguageDetect\TextLanguageDetect;
 
-class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
+class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
 
     function setup ()
     {
         ini_set('magic_quotes_runtime', 0);
-        $this->x = new Text_LanguageDetect();
+        $this->x = new TextLanguageDetect();
     }
 
     function tearDown ()
@@ -174,7 +171,7 @@ class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
     {
         $str = 'This function may return Boolean FALSE, but may also return a non-Boolean value which evaluates to FALSE, such as 0 or "". Please read the section on Booleans for more information. Use the === operator for testing the return value of this function.';
 
-        $myobj = new Text_LanguageDetect;
+        $myobj = new TextLanguageDetect;
 
         $myobj->_use_unicode_narrowing = false;
 
@@ -189,7 +186,7 @@ class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($result != 'english', $result);
 
-        $myobj = new Text_LanguageDetect;
+        $myobj = new TextLanguageDetect;
 
         $count = $myobj->getLanguageCount();
         $returnval = $myobj->omitLanguages(array('danish', 'italian'), true);
@@ -239,7 +236,7 @@ class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
     {
         // if this test fails, then many of the others will
 
-        $myobj = new Text_LanguageDetect;
+        $myobj = new TextLanguageDetect;
         $myobj->setPerlCompatible(true);
 
         $testtext = "hello";
@@ -1593,7 +1590,7 @@ class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
     {
         $str = 'On January 29, 1737, Thomas Paine was born in Thetford, England. His father, a corseter, had grand visions for his son, but by the age of 12, Thomas had failed out of school. The young Paine began apprenticing for his father, but again, he failed.';
 
-        $myobj = new Text_LanguageDetect;
+        $myobj = new TextLanguageDetect;
 
         $result = $myobj->detectSimple($str);
         $this->assertEquals('english', $result);
@@ -1622,8 +1619,8 @@ class Text_LanguageDetectTest extends PHPUnit_Framework_TestCase {
         $j = 0;
         $new_u = '';
         while ($i < strlen($uppercased)) {
-            $u = Text_LanguageDetect::_next_char($uppercased, $i, true);
-            $l = Text_LanguageDetect::_next_char($lowercased, $j, true);
+            $u = TextLanguageDetect::_next_char($uppercased, $i, true);
+            $l = TextLanguageDetect::_next_char($lowercased, $j, true);
             $this->assertEquals($u, $l);
 
             $new_u .= $u;
@@ -1786,7 +1783,7 @@ EOF;
 
         // see what happens when you turn the unicode setting off
 
-        $myobj = new Text_LanguageDetect;
+        $myobj = new TextLanguageDetect;
 
         $str = 'This is a delightful sample of English text';
 

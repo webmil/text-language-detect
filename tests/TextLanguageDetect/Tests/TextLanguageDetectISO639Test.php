@@ -1,24 +1,23 @@
 <?php
-set_include_path(
-    __DIR__ . '/../' . PATH_SEPARATOR . get_include_path()
-);
 
-require_once 'Text/LanguageDetect/ISO639.php';
+namespace TextLanguageDetect\Tests;
 
-class Text_LanguageDetect_ISO639Test extends \PHPUnit_Framework_TestCase
+use TextLanguageDetect\LanguageDetect\TextLanguageDetectISO639;
+
+class TextLanguageDetectISO639Test extends \PHPUnit_Framework_TestCase
 {
     public function testNameToCode2()
     {
         $this->assertEquals(
             'de', 
-            Text_LanguageDetect_ISO639::nameToCode2('german')
+            TextLanguageDetectISO639::nameToCode2('german')
         );
     }
 
     public function testNameToCode2Fail()
     {
         $this->assertNull(
-            Text_LanguageDetect_ISO639::nameToCode2('doesnotexist')
+            TextLanguageDetectISO639::nameToCode2('doesnotexist')
         );
     }
 
@@ -26,14 +25,14 @@ class Text_LanguageDetect_ISO639Test extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'fra', 
-            Text_LanguageDetect_ISO639::nameToCode3('french')
+            TextLanguageDetectISO639::nameToCode3('french')
         );
     }
 
     public function testNameToCode3Fail()
     {
         $this->assertNull(
-            Text_LanguageDetect_ISO639::nameToCode3('doesnotexist')
+            TextLanguageDetectISO639::nameToCode3('doesnotexist')
         );
     }
 
@@ -41,14 +40,14 @@ class Text_LanguageDetect_ISO639Test extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'english', 
-            Text_LanguageDetect_ISO639::code2ToName('en')
+            TextLanguageDetectISO639::code2ToName('en')
         );
     }
 
     public function testCode2ToNameFail()
     {
         $this->assertNull(
-            Text_LanguageDetect_ISO639::code2ToName('nx')
+            TextLanguageDetectISO639::code2ToName('nx')
         );
     }
 
@@ -56,14 +55,14 @@ class Text_LanguageDetect_ISO639Test extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'romanian', 
-            Text_LanguageDetect_ISO639::code3ToName('rom')
+            TextLanguageDetectISO639::code3ToName('rom')
         );
     }
 
     public function testCode3ToNameFail()
     {
         $this->assertNull(
-            Text_LanguageDetect_ISO639::code3ToName('nxx')
+            TextLanguageDetectISO639::code3ToName('nxx')
         );
     }
 
