@@ -55,7 +55,8 @@ $text = 'Test language detection.';
 $lang = $ld->detectConfidence($text);
 ```
 print_r($lang):
-    // output.txt
+
+    // output
     Array
     (
         [language] => english
