@@ -49,9 +49,9 @@ Usage example
 -------------
 In controller:
 ```php
-    $ld = $this->get('language.detect');
-    $text = 'Test language detection.';
-    $lang = $ld->detectConfidence($text);
+$ld = $this->get('language.detect');
+$text = 'Test language detection.';
+$lang = $ld->detectConfidence($text);
 ```
 print_r($lang):
     // output
