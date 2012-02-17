@@ -7,59 +7,55 @@ The package attempts to detect the language of a sample of text by correlating r
 
 It implements a version of a technique originally proposed by Cavnar & Trenkle (1994): "N-Gram-Based Text Categorization".
 
-This is fork of http://pear.php.net/package/Text_LanguageDetect.
-Special for Symfony 2.
-
-Installation in Symfony 2 as service
-------------------------------------
-
-Add Pagerfanta and WhiteOctoberPagerfantaBundle to your vendors:
-
-    git submodule add https://github.com/webmil/text-language-detect.git vendor/text-language-detect
-
-Add to your autoload:
-
-    // app/autoload.php
-    $loader->registerNamespaces(array(
-        // ...
-        'TextLanguageDetect'           => __DIR__.'/../vendor/text-language-detect/lib',
-        // ...
-    ));
-
-Configure service:
-
-    // app/config/config.yml
-    services:
-        language.detect:
-            class: TextLanguageDetect\TextLanguageDetect
-
-
-Limit languages
----------------
-If you're only expecting a limited set of languages, this can greatly speed up processing
-
-    // app/config/config.yml
-    services:
-        language.detect:
-            class: TextLanguageDetect\TextLanguageDetect
-            arguments: 
-                - { languages: ['norwegian', 'russian', 'english', 'german', 'danish', 'swedish', 'spanish', 'italian'] }
+This is fork of [Text_LanguageDetect](http://pear.php.net/package/Text_LanguageDetect) 0.3.0 (alpha).
 
 Usage example
 -------------
-In controller:
-
 ```php
-$ld = $this->get('language.detect');
-$text = 'Test language detection.';
-$lang = $ld->detectConfidence($text);
+<?php
+require_once 'TextLanguageDetect/TextLanguageDetect.php';
+$l = new TextLanguageDetect();
+
+echo "Supported languages:\n";
+try {
+    $langs = $l->getLanguages();
+    sort($langs);
+    echo implode(', ', $langs) . "\n\n";
+} catch (Text_LanguageDetect_Exception $e) {
+    die($e->getMessage());
+}
+
+$text = <<<EOD
+Hallo! Das ist ein Text in deutscher Sprache.
+Mal sehen, ob die Klasse erkennt, welche Sprache das hier ist.
+EOD;
+
+try {
+    //return 2-letter language codes only
+    $l->setNameMode(2);
+
+    $result = $l->detect($text, 4);
+    print_r($result);
+} catch (Text_LanguageDetect_Exception $e) {
+    die($e->getMessage());
+}
 ```
-print_r($lang):
+Output:
 
     // output
+    Supported languages:
+    albanian, arabic, azeri, bengali, bulgarian, cebuano, croatian, czech,
+    danish, dutch, english, estonian, farsi, finnish, french, german, hausa,
+    hawaiian, hindi, hungarian, icelandic, indonesian, italian, kazakh, kyrgyz,
+    latin, latvian, lithuanian, macedonian, mongolian, nepali, norwegian, pashto,
+    pidgin, polish, portuguese, romanian, russian, serbian, slovak, slovene, somali,
+    spanish, swahili, swedish, tagalog, turkish, ukrainian, urdu, uzbek, vietnamese,
+    welsh
+
     Array
     (
-        [language] => english
-        [similarity] => 0.33985507246377
-        [confidence] => 0.018985507246377
+        [de] => 0.40703703703704
+        [nl] => 0.2880658436214
+        [en] => 0.28333333333333
+        [da] => 0.23452674897119
     )
