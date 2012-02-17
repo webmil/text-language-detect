@@ -175,10 +175,12 @@ class TextLanguageDetect
     /**
      * Constructor
      *
+     * @param array $config array of parameters
+     * 
      * Will attempt to load the language database. If it fails, you will get
      * an exception.
      */
-    function __construct($parameters = array())
+    function __construct($config = array())
     {
         $data = $this->_readdb($this->_db_filename);
         $this->_checkTrigram($data['trigram']);
@@ -193,10 +195,26 @@ class TextLanguageDetect
             $this->_clusters = $data['trigram-clusters'];
         }
         
-        if (isset($parameters['languages'])){
-            $this->omitLanguages($parameters['languages'], true);
+        $this->_configure($config);
+    }
+    
+    /**
+     * Configure detection
+     *
+     * @param array $config array of parameters
+     * 
+     */
+    function _configure($config)
+    {
+        if (!empty($config)){
+            if (isset($config['omit_languages'])){
+                $omit = $config['omit_languages'];
+                if (isset($omit['omit_list']) && !empty($omit['omit_list'])){
+                    $include_only = isset($omit['include_only'])?$omit['include_only']:false;
+                    $this->omitLanguages($omit['omit_list'], $include_only);
+                }
+            }
         }
-        
     }
 
     /**
