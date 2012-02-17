@@ -11,6 +11,7 @@ This is fork of [Text_LanguageDetect](http://pear.php.net/package/Text_LanguageD
 
 Usage example
 -------------
+
 ```php
 <?php
 require_once 'TextLanguageDetect/TextLanguageDetect.php';
@@ -21,7 +22,7 @@ try {
     $langs = $l->getLanguages();
     sort($langs);
     echo implode(', ', $langs) . "\n\n";
-} catch (Text_LanguageDetect_Exception $e) {
+} catch (TextLanguageDetectException $e) {
     die($e->getMessage());
 }
 
@@ -36,7 +37,7 @@ try {
 
     $result = $l->detect($text, 4);
     print_r($result);
-} catch (Text_LanguageDetect_Exception $e) {
+} catch (TextLanguageDetectException $e) {
     die($e->getMessage());
 }
 ```
