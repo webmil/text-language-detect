@@ -21,7 +21,6 @@ Usage example
 
 ```php
 <?php
-require_once 'TextLanguageDetect/TextLanguageDetect.php';
 
 use TextLanguageDetect\TextLanguageDetect;
 use TextLanguageDetect\LanguageDetect\TextLanguageDetectException;
