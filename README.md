@@ -7,7 +7,7 @@ The package attempts to detect the language of a sample of text by correlating r
 
 It implements a version of a technique originally proposed by Cavnar & Trenkle (1994): "N-Gram-Based Text Categorization".
 
-This is fork of [Text_LanguageDetect](http://pear.php.net/package/Text_LanguageDetect) 0.3.0 (alpha).
+This is a fork of [Text_LanguageDetect](http://pear.php.net/package/Text_LanguageDetect) 0.3.0 (alpha).
 
 Usage example
 -------------
@@ -15,6 +15,10 @@ Usage example
 ```php
 <?php
 require_once 'TextLanguageDetect/TextLanguageDetect.php';
+
+use TextLanguageDetect\TextLanguageDetect;
+use TextLanguageDetect\LanguageDetect\TextLanguageDetectException;
+
 $l = new TextLanguageDetect();
 
 echo "Supported languages:\n";
