@@ -70,3 +70,13 @@ Output:
         [en] => 0.28333333333333
         [da] => 0.23452674897119
     )
+
+Author
+------
+
+Nicholas Pisarro - infinityminusnine+pear@gmail.com
+
+License
+-------
+
+http://www.debian.org/misc/bsd.license BSD
