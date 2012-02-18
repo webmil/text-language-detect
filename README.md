@@ -9,6 +9,13 @@ It implements a version of a technique originally proposed by Cavnar & Trenkle (
 
 This is a fork of [Text_LanguageDetect](http://pear.php.net/package/Text_LanguageDetect) 0.3.0 (alpha).
 
+Dependencies:
+-------------
+
+    PHP Version: PHP 5.3 or newer
+    PHP Extension: pcre
+    PHP Extension: mbstring (optional)
+
 Usage example
 -------------
 
