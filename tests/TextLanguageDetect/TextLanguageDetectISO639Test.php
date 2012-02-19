@@ -1,6 +1,6 @@
 <?php
 
-namespace TextLanguageDetect\Tests;
+namespace TextLanguageDetect;
 
 use TextLanguageDetect\LanguageDetect\TextLanguageDetectISO639;
 
