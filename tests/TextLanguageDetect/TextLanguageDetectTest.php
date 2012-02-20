@@ -1,6 +1,6 @@
 <?php
 
-namespace TextLanguageDetect\Tests;
+namespace TextLanguageDetect;
 
 /**
  * @package Text_LanguageDetect
@@ -9,7 +9,8 @@ namespace TextLanguageDetect\Tests;
 
 use TextLanguageDetect\TextLanguageDetect;
 
-class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
+class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase 
+{
 
     function setup ()
     {
@@ -40,7 +41,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Language database does not exist:
      */
     function test_readdbNonexistingFile()
@@ -49,7 +50,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Language database is not readable:
      */
     function test_readdbUnreadableFile()
@@ -60,7 +61,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Language database has no elements.
      */
     function test_checkTrigramEmpty()
@@ -69,7 +70,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Language database is not an array
      */
     function test_checkTrigramNoArray()
@@ -78,7 +79,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Error loading database. Try turning magic_quotes_runtime off
      */
     function test_checkTrigramNoArrayMagicQuotes()
@@ -1412,7 +1413,7 @@ class TextLanguageDetectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Unsupported parameter type passed to languageExists()
      */
     function testLanguageExistsUnsupportedType()
@@ -1691,7 +1692,7 @@ EOF;
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Pass a single char only to this method
      */
     function testUnicodeBlockNameParamString()
@@ -1700,7 +1701,7 @@ EOF;
     }
 
     /**
-     * @expectedException Text_LanguageDetect_Exception
+     * @expectedException TextLanguageDetect\LanguageDetect\TextLanguageDetectException
      * @expectedExceptionMessage Input must be of type string or int
      */
     function testUnicodeBlockNameUnsupportedParamType()
