@@ -9,10 +9,19 @@
 
 // browsers will encode multi-byte characters wrong unless they think the page is utf8-encoded
 header('Content-type: text/html; charset=utf-8', true);
+spl_autoload_register(function($class)
+{
+    $file = __DIR__.'/../lib/'.strtr($class, '\\', '/').'.php';
+    if (file_exists($file)) {
+        require $file;
+        return true;
+    }
+});
 
-require_once 'Text/LanguageDetect.php';
+use TextLanguageDetect;
 
-$l = new Text_LanguageDetect;
+$l = new TextLanguageDetect\TextLanguageDetect;
+
 if (isset($_REQUEST['q'])) {
     $q = stripslashes($_REQUEST['q']);
 }

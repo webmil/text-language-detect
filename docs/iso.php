@@ -4,8 +4,19 @@
  *
  * The "name mode" changes the way languages are accepted and returned.
  */ 
-require_once 'Text/LanguageDetect.php';
-$l = new Text_LanguageDetect();
+ 
+spl_autoload_register(function($class)
+{
+    $file = __DIR__.'/../lib/'.strtr($class, '\\', '/').'.php';
+    if (file_exists($file)) {
+        require $file;
+        return true;
+    }
+});
+ 
+use TextLanguageDetect;
+
+$l = new TextLanguageDetect\TextLanguageDetect;
 
 
 //will output the ISO 639-1 two-letter language code
