@@ -76,7 +76,7 @@ class TextLanguageDetect
      * @var      string
      * @access   private
      */
-    var $_db_filename = 'lang.dat';
+    private $_db_filename = 'lang.dat';
 
     /**
      * The filename that stores the unicode block definitions
@@ -87,7 +87,7 @@ class TextLanguageDetect
      * @var string
      * @access private
      */
-    var $_unicode_db_filename = 'unicode_blocks.dat';
+    private $_unicode_db_filename = 'unicode_blocks.dat';
 
     /**
      * The data directory
@@ -97,7 +97,7 @@ class TextLanguageDetect
      * @var      string
      * @access   private
      */
-    var $_data_dir = '@data_dir@';
+    public $_data_dir = '@data_dir@';
 
     /**
      * The trigram data for comparison
@@ -107,7 +107,7 @@ class TextLanguageDetect
      * @var      array
      * @access   private
      */
-    var $_lang_db = array();
+    private $_lang_db = array();
 
     /**
      * stores the map of the trigram data to unicode characters
@@ -115,7 +115,7 @@ class TextLanguageDetect
      * @access private
      * @var array
      */
-    var $_unicode_map;
+    private $_unicode_map;
 
     /**
      * The size of the trigram data arrays
@@ -123,7 +123,7 @@ class TextLanguageDetect
      * @var      int
      * @access   private
      */
-    var $_threshold = 300;
+    private $_threshold = 300;
 
     /**
      * the maximum possible score.
@@ -135,7 +135,7 @@ class TextLanguageDetect
      * @var     int
      * @see     setPerlCompatible()
      */
-    var $_max_score = 0;
+    private $_max_score = 0;
 
     /**
      * Whether or not to simulate perl's Language::Guess exactly
@@ -144,7 +144,7 @@ class TextLanguageDetect
      * @var     bool
      * @see     setPerlCompatible()
      */
-    var $_perl_compatible = false;
+    private $_perl_compatible = false;
 
     /**
      * Whether to use the unicode block detection to speed up processing
@@ -152,7 +152,7 @@ class TextLanguageDetect
      * @access private
      * @var bool
      */
-    var $_use_unicode_narrowing = true;
+    private $_use_unicode_narrowing = true;
 
     /**
      * stores the result of the clustering operation
@@ -161,7 +161,7 @@ class TextLanguageDetect
      * @var     array
      * @see     clusterLanguages()
      */
-    var $_clusters;
+    private $_clusters;
 
     /**
      * Which type of "language names" are accepted and returned:
@@ -170,7 +170,7 @@ class TextLanguageDetect
      * 2 - 2-letter ISO 639-1 code ("en")
      * 3 - 3-letter ISO 639-2 code ("eng")
      */
-    var $_name_mode = 0;
+    private $_name_mode = 0;
 
     /**
      * Constructor
@@ -180,7 +180,7 @@ class TextLanguageDetect
      * Will attempt to load the language database. If it fails, you will get
      * an exception.
      */
-    function __construct($config = array())
+    public function __construct($config = array())
     {
         $data = $this->_readdb($this->_db_filename);
         $this->_checkTrigram($data['trigram']);
@@ -204,7 +204,7 @@ class TextLanguageDetect
      * @param array $config array of parameters
      * 
      */
-    function _configure($config)
+    private function _configure($config)
     {
         if (!empty($config)){
             if (isset($config['omit_languages'])){
@@ -225,7 +225,7 @@ class TextLanguageDetect
      * @return string expected path to the language model database
      * @access private
      */
-    function _get_data_loc($fname)
+    public function _get_data_loc($fname)
     {
         if ($fname{0} == '/' || $fname{0} == '.') {
             // if filename starts with a slash, assume it's an absolute pathname
@@ -254,7 +254,7 @@ class TextLanguageDetect
      * @throws TextLanguageDetectException
      * @access private
      */
-    function _readdb($fname)
+    private function _readdb($fname)
     {
         // finds the correct data dir
         $fname = $this->_get_data_loc($fname);
@@ -284,7 +284,7 @@ class TextLanguageDetect
      * @return void
      * @access private
      */
-    function _checkTrigram($trigram)
+    private function _checkTrigram($trigram)
     {
         if (!is_array($trigram)) {
             if (ini_get('magic_quotes_runtime')) {
@@ -380,7 +380,7 @@ class TextLanguageDetect
      * @return int            the number of languages
      * @throws   TextLanguageDetectException
      */
-    function getLanguageCount()
+    public function getLanguageCount()
     {
         return count($this->_lang_db);
     }
@@ -422,7 +422,7 @@ class TextLanguageDetect
      * @return array        the names of the languages known to this object<<<<<<<
      * @throws   TextLanguageDetectException
      */
-    function getLanguages()
+    public function getLanguages()
     {
         return $this->_convertToNameMode(
             array_keys($this->_lang_db)
@@ -460,7 +460,7 @@ class TextLanguageDetect
      *
      * @return void
      */
-    function setNameMode($name_mode)
+    public function setNameMode($name_mode)
     {
         $this->_name_mode = $name_mode;
     }
@@ -493,7 +493,7 @@ class TextLanguageDetect
      * @access     private
      * @deprecated Superceded by the TextLanguageDetectParser class
      */
-    function _trigram($text)
+    private function _trigram($text)
     {
         $s = new TextLanguageDetectParser($text);
         $s->prepareTrigram();
@@ -513,7 +513,7 @@ class TextLanguageDetect
      * @return array ranks of trigrams
      * @access protected
      */
-    function _arr_rank($arr)
+    protected function _arr_rank($arr)
     {
 
         // sorts alphabetically first as a standard way of breaking rank ties
@@ -546,7 +546,7 @@ class TextLanguageDetect
      * @return void
      * @access private
      */
-    function _bub_sort(&$arr)
+    private function _bub_sort(&$arr)
     {
         // should do the same as this perl statement:
         // sort { $trigrams{$b} == $trigrams{$a}
@@ -586,7 +586,7 @@ class TextLanguageDetect
      * @see    _bub_sort()
      * @access private
      */
-    function _sort_func($a, $b)
+    private function _sort_func($a, $b)
     {
         // each is actually a key/value pair, so that it can compare using both
         list($a_key, $a_value) = $a;
@@ -626,7 +626,7 @@ class TextLanguageDetect
      *             the two trigram sets
      * @access private
      */
-    function _distance($arr1, $arr2)
+    private function _distance($arr1, $arr2)
     {
         $sumdist = 0;
 
@@ -659,7 +659,7 @@ class TextLanguageDetect
      * @see    _distance()
      * @access private
      */
-    function _normalize_score($score, $base_count = null)
+    private function _normalize_score($score, $base_count = null)
     {
         if ($base_count === null) {
             $base_count = $this->_threshold;
@@ -1000,7 +1000,7 @@ class TextLanguageDetect
      * @see    unicodeBlockName()
      * @access protected
      */
-    function _unicode_block_name($unicode, $blocks, $block_count = -1)
+    protected function _unicode_block_name($unicode, $blocks, $block_count = -1)
     {
         // for a reference, see
         // http://www.unicode.org/Public/UNIDATA/Blocks.txt
@@ -1053,7 +1053,7 @@ class TextLanguageDetect
      * @throws TextLanguageDetectException
      * @access protected
      */
-    function _read_unicode_block_db()
+    protected function _read_unicode_block_db()
     {
         // since the unicode definitions are always going to be the same,
         // might as well share the memory for the db with all other instances
@@ -1179,7 +1179,7 @@ class TextLanguageDetect
      * @deprecated  this function will eventually be removed and placed into
      *              the model generation class
      */
-    function clusterLanguages()
+    public function clusterLanguages()
     {
         // todo: set the maximum number of clusters
         // return cached result, if any
@@ -1515,7 +1515,7 @@ class TextLanguageDetect
      * @access protected
      * @link   http://en.wikipedia.org/wiki/UTF-8
      */
-    function _utf8char2unicode($char)
+    protected function _utf8char2unicode($char)
     {
         // strlen() here will actually get the binary length of a single char
         switch (strlen($char)) {
@@ -1657,7 +1657,7 @@ class TextLanguageDetect
      *
      * @return string|array Language name
      */
-    function _convertFromNameMode($lang, $convertKey = false)
+    private function _convertFromNameMode($lang, $convertKey = false)
     {
         if ($this->_name_mode == 0) {
             return $lang;
@@ -1697,7 +1697,7 @@ class TextLanguageDetect
      *
      * @return string|array Language name
      */
-    function _convertToNameMode($lang, $convertKey = false)
+    private function _convertToNameMode($lang, $convertKey = false)
     {
         if ($this->_name_mode == 0) {
             return $lang;
