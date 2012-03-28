@@ -7,9 +7,18 @@
  * @version CVS: $Id: example_clui.php 322305 2012-01-15 00:04:17Z clockwerx $
  */
 
-require_once 'Text/LanguageDetect.php';
+spl_autoload_register(function($class)
+{
+    $file = __DIR__.'/../lib/'.strtr($class, '\\', '/').'.php';
+    if (file_exists($file)) {
+        require $file;
+        return true;
+    }
+});
 
-$l = new Text_LanguageDetect;
+use TextLanguageDetect;
+
+$l = new TextLanguageDetect\TextLanguageDetect;
 
 $stdin = fopen('php://stdin', 'r');
 

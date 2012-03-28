@@ -42,7 +42,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     string
      */
-    var $_string;
+    private $_string;
 
     /**
      * stores the trigram frequencies of the sample
@@ -50,7 +50,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     string
      */
-    var $_trigrams = array();
+    private $_trigrams = array();
 
     /**
      * stores the trigram ranks of the sample
@@ -58,7 +58,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     array
      */
-    var $_trigram_ranks = array();
+    private $_trigram_ranks = array();
 
     /**
      * stores the unicode blocks of the sample
@@ -66,7 +66,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     array
      */
-    var $_unicode_blocks = array();
+    private $_unicode_blocks = array();
     
     /**
      * Whether the parser should compile the unicode ranges
@@ -74,7 +74,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     bool
      */
-    var $_compile_unicode = false;
+    private $_compile_unicode = false;
 
     /**
      * Whether the parser should compile trigrams
@@ -82,7 +82,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     bool
      */
-    var $_compile_trigram = false;
+    private $_compile_trigram = false;
 
     /**
      * Whether the trigram parser should pad the beginning of the string
@@ -90,7 +90,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     bool
      */
-    var $_trigram_pad_start = false;
+    private $_trigram_pad_start = false;
 
     /**
      * Whether the unicode parser should skip non-alphabetical ascii chars
@@ -98,7 +98,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @var     bool
      */
-    var $_unicode_skip_symbols = true;
+    private $_unicode_skip_symbols = true;
 
     /**
      * Constructor
@@ -106,7 +106,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  private
      * @param   string  $string     string to be parsed
      */
-    function __construct($string) {
+    public function __construct($string) {
         $this->_string = $string;
     }
 
@@ -130,7 +130,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @param   bool    $bool true for on, false for off
      */
-    function prepareTrigram($bool = true)
+    public function prepareTrigram($bool = true)
     {
         $this->_compile_trigram = $bool;
     }
@@ -141,7 +141,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @param   bool    $bool true for on, false for off
      */
-    function prepareUnicode($bool = true)
+    public function prepareUnicode($bool = true)
     {
         $this->_compile_unicode = $bool;
     }
@@ -152,7 +152,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @param   bool    $bool true for on, false for off
      */
-    function setPadStart($bool = true)
+    public function setPadStart($bool = true)
     {
         $this->_trigram_pad_start = $bool;
     }
@@ -163,7 +163,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @param   bool    $bool true for on, false for off
      */
-    function setUnicodeSkipSymbols($bool = true)
+    public function setUnicodeSkipSymbols($bool = true)
     {
         $this->_unicode_skip_symbols = $bool;
     }
@@ -174,7 +174,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @return  array    trigram ranks in the text sample
      */
-    function &getTrigramRanks()
+    public function &getTrigramRanks()
     {
         return $this->_trigram_ranks;
     }
@@ -187,7 +187,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @return  array    trigram freqencies in the text sample
      */
-    function &getTrigramFreqs()
+    public function &getTrigramFreqs()
     {
         return $this->_trigram;
     }
@@ -198,7 +198,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      * @access  public
      * @return  array   unicode blocks in the text sample
      */
-    function &getUnicodeBlocks()
+    public function &getUnicodeBlocks()
     {
         return $this->_unicode_blocks;
     }
@@ -214,7 +214,7 @@ class TextLanguageDetectParser extends TextLanguageDetect
      *
      * @access public
      */
-    function analyze()
+    public function analyze()
     {
         $len = strlen($this->_string);
         $byte_counter = 0;
