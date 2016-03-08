@@ -422,7 +422,7 @@ class TextLanguageDetect
      * @return array        the names of the languages known to this object<<<<<<<
      * @throws   TextLanguageDetectException
      */
-    public static function getLanguages()
+    public function getLanguages()
     {
         return $this->_convertToNameMode(
             array_keys($this->_lang_db)
