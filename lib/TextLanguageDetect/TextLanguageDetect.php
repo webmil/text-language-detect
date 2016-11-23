@@ -1025,14 +1025,12 @@ class TextLanguageDetect
         while ($low <= $high) {
             $mid = floor(($low + $high) / 2);
 
-            if ($unicode < $blocks[$mid][0]) {
+        if ($unicode < hexdec($blocks[$mid][0])) {
                 // if it's lower than the lower bound
                 $high = $mid - 1;
-
-            } elseif ($unicode > $blocks[$mid][1]) {
+            } elseif ($unicode > hexdec($blocks[$mid][1])) {
                 // if it's higher than the upper bound
                 $low = $mid + 1;
-
             } else {
                 // found it
                 return $blocks[$mid];
