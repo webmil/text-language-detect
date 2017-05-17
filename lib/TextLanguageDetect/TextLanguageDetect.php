@@ -1022,21 +1022,35 @@ class TextLanguageDetect
         $low = 1; // start with 1 because ascii was 0
 
         // your average binary search algorithm
-        while ($low <= $high) {
-            $mid = floor(($low + $high) / 2);
-
-        if ($unicode < hexdec($blocks[$mid][0])) {
-                // if it's lower than the lower bound
-                $high = $mid - 1;
-            } elseif ($unicode > hexdec($blocks[$mid][1])) {
-                // if it's higher than the upper bound
-                $low = $mid + 1;
-            } else {
-                // found it
-                return $blocks[$mid];
+        if (version_compare(phpversion(), '7.0.0', '<')) {
+            while ($low <= $high) {
+                $mid = floor(($low + $high) / 2);
+                if ($unicode < $blocks[$mid][0]) {        
+                    // if it's lower than the lower bound
+                    $high = $mid - 1;
+                } elseif ($unicode > $blocks[$mid][1]) {        
+                    // if it's higher than the upper bound
+                    $low = $mid + 1;
+                } else {
+                    // found it
+                    return $blocks[$mid];
+                }
+            }        
+        } else { 
+            while ($low <= $high) {
+                $mid = floor(($low + $high) / 2);
+                if ($unicode < hexdec($blocks[$mid][0])) {
+                    // if it's lower than the lower bound
+                    $high = $mid - 1;
+                } elseif ($unicode > hexdec($blocks[$mid][1])) {
+                    // if it's higher than the upper bound
+                    $low = $mid + 1;
+                } else {
+                    // found it
+                    return $blocks[$mid];  
+                }
             }
         }
-
         // failed to find the block
         return -1;
 
